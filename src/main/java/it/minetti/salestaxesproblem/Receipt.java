@@ -6,6 +6,10 @@ import java.util.Map.Entry;
 import java.text.DecimalFormat;
 
 public class Receipt {
+
+	private static String NL = System.getProperty("line.separator");
+	private static DecimalFormat df = new DecimalFormat("0.00");
+
 	private boolean taxesApplied = false;
 	private Map<Item, Integer> items;
 
@@ -22,18 +26,15 @@ public class Receipt {
 			throw new TaxesAlreadyApplied();
 		}
 		Item i = new UntaxedItem(p);
-		int quantity = 0;
-
-		if (items.containsKey(i)) {
-			quantity = items.get(i);
-		}
+		int quantity = getQuantity(i);
 
 		items.put(i, quantity + amount);
 		return quantity + amount;
 	}
 
-	private static String NL = System.getProperty("line.separator");
-	private DecimalFormat df = new DecimalFormat("0.00");
+	private int getQuantity(Item i) {
+		return items.getOrDefault(i, 0);
+	}
 
 	public StringBuffer prepareInput() {
 		StringBuffer sb = new StringBuffer(items.size() * 30);
