@@ -1,6 +1,4 @@
-package it.minetti.salestaxesproblem.domain;
-
-import it.minetti.salestaxesproblem.TaxedItem;
+package it.minetti.salestaxesproblem.domain.items;
 
 public class BasicTaxedItem extends TaxedItem {
 

@@ -1,4 +1,4 @@
-package it.minetti.salestaxesproblem.entity;
+package it.minetti.salestaxesproblem.entities;
 
 public final class Product {
   public enum ProductType {

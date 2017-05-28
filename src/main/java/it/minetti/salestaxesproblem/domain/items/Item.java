@@ -1,6 +1,6 @@
-package it.minetti.salestaxesproblem.domain;
+package it.minetti.salestaxesproblem.domain.items;
 
-import it.minetti.salestaxesproblem.entity.Product.ProductType;
+import it.minetti.salestaxesproblem.entities.Product.ProductType;
 
 public interface Item {
   String getDescription();

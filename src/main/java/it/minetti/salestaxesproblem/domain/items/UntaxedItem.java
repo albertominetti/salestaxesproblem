@@ -1,7 +1,7 @@
-package it.minetti.salestaxesproblem.domain;
+package it.minetti.salestaxesproblem.domain.items;
 
-import it.minetti.salestaxesproblem.entity.Product;
-import it.minetti.salestaxesproblem.entity.Product.ProductType;
+import it.minetti.salestaxesproblem.entities.Product;
+import it.minetti.salestaxesproblem.entities.Product.ProductType;
 
 public final class UntaxedItem implements Item {
 

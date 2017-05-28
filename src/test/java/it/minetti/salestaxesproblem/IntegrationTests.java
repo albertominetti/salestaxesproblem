@@ -1,22 +1,26 @@
 package it.minetti.salestaxesproblem;
 
-import it.minetti.salestaxesproblem.domain.Item;
+import it.minetti.salestaxesproblem.domain.Bill;
+import it.minetti.salestaxesproblem.domain.items.Item;
 import it.minetti.salestaxesproblem.domain.Receipt;
-import it.minetti.salestaxesproblem.domain.Receipt.TaxesAlreadyApplied;
-import it.minetti.salestaxesproblem.domain.Receipt.TaxesNotYetApplied;
-import it.minetti.salestaxesproblem.domain.UntaxedItem;
-import it.minetti.salestaxesproblem.entity.Product;
-import it.minetti.salestaxesproblem.entity.Product.ProductType;
+import it.minetti.salestaxesproblem.domain.items.TaxedItem;
+import it.minetti.salestaxesproblem.domain.items.UntaxedItem;
+import it.minetti.salestaxesproblem.entities.Product;
+import it.minetti.salestaxesproblem.entities.Product.ProductType;
 import org.junit.Test;
 
 import java.util.Map;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 public class IntegrationTests {
 
+  private final Printer printer = new Printer();
+
   @Test
-  public void input1() throws TaxesAlreadyApplied, TaxesNotYetApplied {
+  public void input1() {
     System.out.println("Test for input 1");
     Product theBook = new Product("book", ProductType.BOOK, false, 12.49);
     Product theCD = new Product("music CD", ProductType.OTHER, false, 14.99);
@@ -29,11 +33,11 @@ public class IntegrationTests {
     r.addProduct(theChocolate);
 
 
-    System.out.println(r.prepareInput());
-    r.calculateTaxes();
-    System.out.println(r.prepareOutput());
+    System.out.println(printer.print(r));
+    Bill bill = new Bill(r);
+    System.out.println(printer.print(bill));
 
-    Map<Item, Integer> taxedItems = r.getItems();
+    Map<TaxedItem, Integer> taxedItems = bill.getItems();
 
     Item theBookItem = new UntaxedItem(theBook);
     Item theCDItem = new UntaxedItem(theCD);
@@ -56,10 +60,13 @@ public class IntegrationTests {
       }
     }
 
+    assertThat(bill.getTotalAmount(), is(29.83));
+    assertThat(bill.getTotalTaxes(), is(1.50));
+
   }
 
   @Test
-  public void input2() throws TaxesAlreadyApplied, TaxesNotYetApplied {
+  public void input2() {
     System.out.println("Test for input 2");
     Product theChocolate = new Product("imported box of chocolate", ProductType.FOOD, true, 10.0);
     Product thePerfume = new Product("imported bottle of perfume", ProductType.OTHER, true, 47.50);
@@ -70,12 +77,12 @@ public class IntegrationTests {
     r.addProduct(thePerfume);
 
 
-    System.out.println(r.prepareInput());
-    r.calculateTaxes();
-    System.out.println(r.prepareOutput());
+    System.out.println(printer.print(r));
+    Bill bill = new Bill(r);
+    System.out.println(printer.print(bill));
 
 
-    Map<Item, Integer> taxedItems = r.getItems();
+    Map<TaxedItem, Integer> taxedItems = bill.getItems();
 
     Item theChocolateItem = new UntaxedItem(theChocolate);
     Item thePerfumeItem = new UntaxedItem(thePerfume);
@@ -95,10 +102,13 @@ public class IntegrationTests {
 
     }
 
+    assertThat(bill.getTotalAmount(), is(60.40));
+    assertThat(bill.getTotalTaxes(), is(2.90));
+
   }
 
   @Test
-  public void input3() throws TaxesAlreadyApplied, TaxesNotYetApplied {
+  public void input3() {
     System.out.println("Test for input 3");
     Product theImportedPerfume = new Product("imported bottle of perfume", ProductType.OTHER, true, 27.99);
     Product thePerfume = new Product("bottle of perfume", ProductType.OTHER, false, 18.99);
@@ -113,12 +123,12 @@ public class IntegrationTests {
     r.addProduct(theChocolate);
 
 
-    System.out.println(r.prepareInput());
-    r.calculateTaxes();
-    System.out.println(r.prepareOutput());
+    System.out.println(printer.print(r));
+    Bill bill = new Bill(r);
+    System.out.println(printer.print(bill));
 
 
-    Map<Item, Integer> taxedItems = r.getItems();
+    Map<TaxedItem, Integer> taxedItems = bill.getItems();
 
     Item theImportedPerfumeItem = new UntaxedItem(theImportedPerfume);
     Item thePerfumeItem = new UntaxedItem(thePerfume);
@@ -148,6 +158,8 @@ public class IntegrationTests {
       }
     }
 
+    assertThat(bill.getTotalAmount(), is(71.88));
+    assertThat(bill.getTotalTaxes(), is(3.90));
 
   }
 
