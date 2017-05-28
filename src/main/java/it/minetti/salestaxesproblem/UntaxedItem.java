@@ -2,19 +2,7 @@ package it.minetti.salestaxesproblem;
 
 import it.minetti.salestaxesproblem.Product.ProductType;
 
-public class UntaxedItem implements Item {
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public void setImported(boolean isImported) {
-		this.isImported = isImported;
-	}
-
-	public void setType(ProductType type) {
-		this.type = type;
-	}
+public final class UntaxedItem implements Item {
 
 	private String description;
 	private boolean isImported;
@@ -41,10 +29,6 @@ public class UntaxedItem implements Item {
 
 	public boolean isImported() {
 		return isImported;
-	}
-
-	public Item filter() {
-		return this;
 	}
 
 	public double getShelfPrice() {
