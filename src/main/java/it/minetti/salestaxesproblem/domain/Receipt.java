@@ -30,7 +30,7 @@ public class Receipt {
   }
 
   public Map<UntaxedItem, Integer> getItems() {
-    return new LinkedHashMap<>(items); //the keys and values themselves are not cloned
+    return new LinkedHashMap<>(items); //it's not a deep copy
   }
 
 }

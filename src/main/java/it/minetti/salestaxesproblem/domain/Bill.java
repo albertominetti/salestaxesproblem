@@ -34,15 +34,15 @@ public class Bill {
     return taxedItems;
   }
 
-  TaxedItem applyTaxesTo(UntaxedItem item) {
+  static TaxedItem applyTaxesTo(UntaxedItem item) {
     TaxedItem taxedItem = new ZeroTaxesItem(item);
 
     if (!exemptProductTypes.contains(item.getType())) {
-      taxedItem = new BasicTaxedItem(item);
+      taxedItem = new BasicTaxedItem(taxedItem);
     }
 
     if (item.isImported()) {
-      taxedItem = new ImportTaxedItem(item);
+      taxedItem = new ImportTaxedItem(taxedItem);
     }
 
     return taxedItem;

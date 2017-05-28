@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 
 import static java.math.BigDecimal.ZERO;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.comparesEqualTo;
 import static org.junit.Assert.assertThat;
 
@@ -24,5 +25,40 @@ public class TaxedItemTest {
     assertThat(TaxedItem.roundToNearest5cents(new BigDecimal("0.075")), comparesEqualTo(tenCents));
   }
 
-  ;
+  @Test
+  public void finalPrice() throws Exception {
+    StubTaxedItem item = new StubTaxedItem(new StubItem());
+    assertThat(item.getShelfPrice(), comparesEqualTo(new BigDecimal("12345.88")));
+    assertThat(item.getFinalPrice(), comparesEqualTo(new BigDecimal("18642.28")));
+    assertThat(item.getDescription(), is("descr"));
+  }
+
+  private class StubTaxedItem extends TaxedItem {
+
+    public StubTaxedItem(Item item) {
+      super(item);
+    }
+
+    @Override
+    public BigDecimal getRate() {
+      return new BigDecimal("0.51");
+    }
+  }
+
+  private class StubItem implements Item {
+    @Override
+    public String getDescription() {
+      return "descr";
+    }
+
+    @Override
+    public BigDecimal getFinalPrice() {
+      return getShelfPrice();
+    }
+
+    @Override
+    public BigDecimal getShelfPrice() {
+      return new BigDecimal("12345.88");
+    }
+  }
 }
