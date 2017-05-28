@@ -1,10 +1,13 @@
 package it.minetti.salestaxesproblem;
 
-public abstract class TaxedItem implements Item{
+import it.minetti.salestaxesproblem.domain.Item;
+import it.minetti.salestaxesproblem.entity.Product;
+
+public abstract class TaxedItem implements Item {
 
 	private Item item;
 
-		abstract double getRate();
+		public abstract double getRate();
 		
 		public TaxedItem(Item item){
 			this.item = item;
@@ -25,5 +28,23 @@ public abstract class TaxedItem implements Item{
 		protected Item getItem() {
 			return item;
 		}
-		
+
+
+	public Product.ProductType getType() {
+		return item.getType();
 	}
+
+	public boolean isImported() {
+		return getItem().isImported();
+	}
+
+	public String getDescription() {
+		return getItem().getDescription();
+	}
+
+	public double getShelfPrice() {
+		return getItem().getShelfPrice();
+	}
+
+
+}

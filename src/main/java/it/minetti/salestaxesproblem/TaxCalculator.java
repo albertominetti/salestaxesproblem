@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import it.minetti.salestaxesproblem.Product.ProductType;
+import it.minetti.salestaxesproblem.domain.BasicTaxedItem;
+import it.minetti.salestaxesproblem.domain.ImportTaxedItem;
+import it.minetti.salestaxesproblem.domain.Item;
+import it.minetti.salestaxesproblem.entity.Product.ProductType;
 
 
 public class TaxCalculator {
