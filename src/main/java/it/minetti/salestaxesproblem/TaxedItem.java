@@ -5,46 +5,46 @@ import it.minetti.salestaxesproblem.entity.Product;
 
 public abstract class TaxedItem implements Item {
 
-	private Item item;
+  private Item item;
 
-		public abstract double getRate();
-		
-		public TaxedItem(Item item){
-			this.item = item;
-		}
+  public abstract double getRate();
 
-		private static double roundToNearest5cents(double decimal) {
-			double ROUND_FACTOR = 0.05;
-			return ROUND_FACTOR * (Math.ceil(decimal / ROUND_FACTOR));
-		}
-		
-		public double getFinalPrice(){
-			double itemFinalPrice = item.getFinalPrice();
-			double salesTax = roundToNearest5cents(item.getShelfPrice() * this.getRate());	
-			return salesTax + itemFinalPrice;
-		}
+  public TaxedItem(Item item) {
+    this.item = item;
+  }
 
+  private static double roundToNearest5cents(double decimal) {
+    double ROUND_FACTOR = 0.05;
+    return ROUND_FACTOR * (Math.ceil(decimal / ROUND_FACTOR));
+  }
 
-		protected Item getItem() {
-			return item;
-		}
+  public double getFinalPrice() {
+    double itemFinalPrice = item.getFinalPrice();
+    double salesTax = roundToNearest5cents(item.getShelfPrice() * this.getRate());
+    return salesTax + itemFinalPrice;
+  }
 
 
-	public Product.ProductType getType() {
-		return item.getType();
-	}
+  protected Item getItem() {
+    return item;
+  }
 
-	public boolean isImported() {
-		return getItem().isImported();
-	}
 
-	public String getDescription() {
-		return getItem().getDescription();
-	}
+  public Product.ProductType getType() {
+    return item.getType();
+  }
 
-	public double getShelfPrice() {
-		return getItem().getShelfPrice();
-	}
+  public boolean isImported() {
+    return getItem().isImported();
+  }
+
+  public String getDescription() {
+    return getItem().getDescription();
+  }
+
+  public double getShelfPrice() {
+    return getItem().getShelfPrice();
+  }
 
 
 }

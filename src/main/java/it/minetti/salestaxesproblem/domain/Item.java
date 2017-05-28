@@ -3,13 +3,13 @@ package it.minetti.salestaxesproblem.domain;
 import it.minetti.salestaxesproblem.entity.Product.ProductType;
 
 public interface Item {
-	String getDescription();
+  String getDescription();
 
-	double getFinalPrice();
+  double getFinalPrice();
 
-	double getShelfPrice();
+  double getShelfPrice();
 
-	boolean isImported();
+  boolean isImported();
 
-	ProductType getType();
+  ProductType getType();
 }
