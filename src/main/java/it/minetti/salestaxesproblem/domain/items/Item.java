@@ -11,7 +11,4 @@ public interface Item {
 
   BigDecimal getShelfPrice();
 
-  boolean isImported();
-
-  ProductType getType();
 }

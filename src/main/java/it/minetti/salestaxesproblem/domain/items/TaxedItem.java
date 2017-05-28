@@ -24,19 +24,6 @@ public abstract class TaxedItem implements Item {
     return item.getFinalPrice().add(salesTax);
   }
 
-  protected Item getItem() {
-    return item;
-  }
-
-
-  public Product.ProductType getType() {
-    return item.getType();
-  }
-
-  public boolean isImported() {
-    return item.isImported();
-  }
-
   public String getDescription() {
     return item.getDescription();
   }

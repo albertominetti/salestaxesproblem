@@ -14,7 +14,7 @@ import static java.util.Arrays.asList;
 
 public class Bill {
 
-  private static List<ProductType> exemptionByType = asList(ProductType.BOOK, ProductType.FOOD, ProductType.MEDICAL);
+  private static List<ProductType> exemptProductTypes = asList(ProductType.BOOK, ProductType.FOOD, ProductType.MEDICAL);
 
   private Map<TaxedItem, Integer> items;
 
@@ -22,7 +22,7 @@ public class Bill {
     this.items = applyTaxesTo(r.getItems());
   }
 
-  public Map<TaxedItem, Integer> applyTaxesTo(Map<UntaxedItem, Integer> items) {
+  Map<TaxedItem, Integer> applyTaxesTo(Map<UntaxedItem, Integer> items) {
     Map<TaxedItem, Integer> taxedItems = new LinkedHashMap<>(items.size());
 
     for (Entry<UntaxedItem, Integer> e : items.entrySet()) {
@@ -34,11 +34,10 @@ public class Bill {
     return taxedItems;
   }
 
-
   TaxedItem applyTaxesTo(UntaxedItem item) {
     TaxedItem taxedItem = new ZeroTaxesItem(item);
 
-    if (!exemptionByType.contains(item.getType())) {
+    if (!exemptProductTypes.contains(item.getType())) {
       taxedItem = new BasicTaxedItem(item);
     }
 
@@ -49,23 +48,19 @@ public class Bill {
     return taxedItem;
   }
 
-  public Map<TaxedItem, Integer> getItems() {
-    return items;
-  }
-
   public BigDecimal getTotalTaxes() {
     BigDecimal totalTaxes = BigDecimal.ZERO;
     for (Map.Entry<TaxedItem, Integer> e : items.entrySet()) {
       Item item = e.getKey();
       int quantity = e.getValue();
 
-      BigDecimal subTotalTaxes = item.getFinalPrice().subtract(item.getShelfPrice()).multiply(new BigDecimal(quantity));
+      BigDecimal singleItemTaxes = item.getFinalPrice().subtract(item.getShelfPrice());
+      BigDecimal subTotalTaxes = singleItemTaxes.multiply(new BigDecimal(quantity));
       totalTaxes = totalTaxes.add(subTotalTaxes);
     }
 
     return totalTaxes;
   }
-
 
   public BigDecimal getTotalAmount() {
     BigDecimal totalAmount = BigDecimal.ZERO;
@@ -75,9 +70,12 @@ public class Bill {
 
       BigDecimal subTotalAmount = item.getFinalPrice().multiply(new BigDecimal(quantity));
       totalAmount = totalAmount.add(subTotalAmount);
-
     }
+
     return totalAmount;
   }
 
+  public Map<TaxedItem, Integer> getItems() {
+    return items;
+  }
 }
