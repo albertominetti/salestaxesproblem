@@ -1,5 +1,7 @@
 package it.minetti.salestaxesproblem.entities;
 
+import java.math.BigDecimal;
+
 public final class Product {
   public enum ProductType {
     BOOK, FOOD, MEDICAL, OTHER
@@ -8,7 +10,7 @@ public final class Product {
   private String description;
   private ProductType type = ProductType.OTHER;
   private boolean isImported = false;
-  private double shielfPrice;
+  private BigDecimal shielfPrice;
 
   public String getDescription() {
     return description;
@@ -22,11 +24,11 @@ public final class Product {
     return isImported;
   }
 
-  public double getShielfPrice() {
+  public BigDecimal getShielfPrice() {
     return shielfPrice;
   }
 
-  public Product(String description, ProductType type, boolean isImported, double shielfPrice) {
+  public Product(String description, ProductType type, boolean isImported, BigDecimal shielfPrice) {
     this.description = description;
     this.type = type;
     this.isImported = isImported;

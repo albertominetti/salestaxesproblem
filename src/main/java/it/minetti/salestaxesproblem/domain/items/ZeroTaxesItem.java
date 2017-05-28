@@ -1,12 +1,11 @@
 package it.minetti.salestaxesproblem.domain.items;
 
-import it.minetti.salestaxesproblem.domain.items.Item;
-import it.minetti.salestaxesproblem.domain.items.TaxedItem;
+import java.math.BigDecimal;
 
 public class ZeroTaxesItem extends TaxedItem {
   @Override
-  public double getRate() {
-    return 0.0;
+  public BigDecimal getRate() {
+    return BigDecimal.ZERO;
   }
 
   public ZeroTaxesItem(Item item) {

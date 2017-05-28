@@ -3,14 +3,17 @@ package it.minetti.salestaxesproblem.domain.items;
 import it.minetti.salestaxesproblem.entities.Product;
 import it.minetti.salestaxesproblem.entities.Product.ProductType;
 
+import java.math.BigDecimal;
+
 public final class UntaxedItem implements Item {
 
   private String description;
   private boolean isImported;
-  private double shelfPrice;
+  private BigDecimal shelfPrice;
   private ProductType type;
 
-  public UntaxedItem(String description, ProductType type, boolean isImported, double shelfPrice) {
+  // TODO use in tests
+  public UntaxedItem(String description, ProductType type, boolean isImported, BigDecimal shelfPrice) {
     this.description = description;
     this.shelfPrice = shelfPrice;
     this.isImported = isImported;
@@ -32,11 +35,11 @@ public final class UntaxedItem implements Item {
     return isImported;
   }
 
-  public double getShelfPrice() {
+  public BigDecimal getShelfPrice() {
     return this.shelfPrice;
   }
 
-  public double getFinalPrice() {
+  public BigDecimal getFinalPrice() {
     return shelfPrice;
   }
 

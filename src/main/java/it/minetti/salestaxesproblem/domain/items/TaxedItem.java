@@ -1,29 +1,28 @@
 package it.minetti.salestaxesproblem.domain.items;
 
-import it.minetti.salestaxesproblem.domain.items.Item;
 import it.minetti.salestaxesproblem.entities.Product;
+
+import java.math.BigDecimal;
 
 public abstract class TaxedItem implements Item {
 
   private Item item;
 
-  public abstract double getRate();
+  public abstract BigDecimal getRate();
 
   public TaxedItem(Item item) {
     this.item = item;
   }
 
-  private static double roundToNearest5cents(double decimal) {
-    double ROUND_FACTOR = 0.05;
-    return ROUND_FACTOR * (Math.ceil(decimal / ROUND_FACTOR));
+  static BigDecimal roundToNearest5cents(BigDecimal decimal) {
+    BigDecimal ROUND_FACTOR = new BigDecimal("0.05");
+    return ROUND_FACTOR.multiply(decimal.divide(ROUND_FACTOR, 0, BigDecimal.ROUND_UP));
   }
 
-  public double getFinalPrice() {
-    double itemFinalPrice = item.getFinalPrice();
-    double salesTax = roundToNearest5cents(item.getShelfPrice() * this.getRate());
-    return salesTax + itemFinalPrice;
+  public BigDecimal getFinalPrice() {
+    BigDecimal salesTax = roundToNearest5cents(item.getShelfPrice().multiply(this.getRate()));
+    return item.getFinalPrice().add(salesTax);
   }
-
 
   protected Item getItem() {
     return item;
@@ -35,15 +34,15 @@ public abstract class TaxedItem implements Item {
   }
 
   public boolean isImported() {
-    return getItem().isImported();
+    return item.isImported();
   }
 
   public String getDescription() {
-    return getItem().getDescription();
+    return item.getDescription();
   }
 
-  public double getShelfPrice() {
-    return getItem().getShelfPrice();
+  public BigDecimal getShelfPrice() {
+    return item.getShelfPrice();
   }
 
 

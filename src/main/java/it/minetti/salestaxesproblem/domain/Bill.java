@@ -3,6 +3,7 @@ package it.minetti.salestaxesproblem.domain;
 import it.minetti.salestaxesproblem.domain.items.*;
 import it.minetti.salestaxesproblem.entities.Product.ProductType;
 
+import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,28 +53,28 @@ public class Bill {
     return items;
   }
 
-  public double getTotalTaxes() {
-    double totalTaxes = 0.0;
+  public BigDecimal getTotalTaxes() {
+    BigDecimal totalTaxes = BigDecimal.ZERO;
     for (Map.Entry<TaxedItem, Integer> e : items.entrySet()) {
       Item item = e.getKey();
       int quantity = e.getValue();
 
-      double subTotalTaxes = (item.getFinalPrice() - item.getShelfPrice()) * quantity;
-      totalTaxes += subTotalTaxes;
+      BigDecimal subTotalTaxes = item.getFinalPrice().subtract(item.getShelfPrice()).multiply(new BigDecimal(quantity));
+      totalTaxes = totalTaxes.add(subTotalTaxes);
     }
 
     return totalTaxes;
   }
 
 
-  public double getTotalAmount() {
-    double totalAmount = 0.0;
+  public BigDecimal getTotalAmount() {
+    BigDecimal totalAmount = BigDecimal.ZERO;
     for (Map.Entry<TaxedItem, Integer> e : items.entrySet()) {
       Item item = e.getKey();
       int quantity = e.getValue();
 
-      double subTotalAmount = item.getFinalPrice() * quantity;
-      totalAmount += subTotalAmount;
+      BigDecimal subTotalAmount = item.getFinalPrice().multiply(new BigDecimal(quantity));
+      totalAmount = totalAmount.add(subTotalAmount);
 
     }
     return totalAmount;

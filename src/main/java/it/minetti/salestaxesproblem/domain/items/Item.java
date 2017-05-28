@@ -2,12 +2,14 @@ package it.minetti.salestaxesproblem.domain.items;
 
 import it.minetti.salestaxesproblem.entities.Product.ProductType;
 
+import java.math.BigDecimal;
+
 public interface Item {
   String getDescription();
 
-  double getFinalPrice();
+  BigDecimal getFinalPrice();
 
-  double getShelfPrice();
+  BigDecimal getShelfPrice();
 
   boolean isImported();
 

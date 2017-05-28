@@ -1,5 +1,7 @@
 package it.minetti.salestaxesproblem.domain.items;
 
+import java.math.BigDecimal;
+
 public class ImportTaxedItem extends TaxedItem {
 
   public ImportTaxedItem(Item item) {
@@ -7,8 +9,8 @@ public class ImportTaxedItem extends TaxedItem {
   }
 
   @Override
-  public double getRate() {
-    return 0.05;
+  public BigDecimal getRate() {
+    return new BigDecimal("0.05");
   }
 
 }
