@@ -12,8 +12,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.util.Map;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.Matchers.comparesEqualTo;
 import static org.junit.Assert.assertThat;
 
 public class IntegrationTests {
@@ -61,8 +60,8 @@ public class IntegrationTests {
 //      }
 //    }
 
-    assertThat(bill.getTotalAmount(), is(29.83));
-    assertThat(bill.getTotalTaxes(), is(1.50));
+    assertThat(bill.getTotalAmount(), comparesEqualTo(new BigDecimal("29.83")));
+    assertThat(bill.getTotalTaxes(), comparesEqualTo(new BigDecimal("1.50")));
 
   }
 
@@ -103,8 +102,8 @@ public class IntegrationTests {
 //
 //    }
 
-    assertThat(bill.getTotalAmount(), is(60.40));
-    assertThat(bill.getTotalTaxes(), is(2.90));
+    assertThat(bill.getTotalAmount(), comparesEqualTo(new BigDecimal("60.40")));
+    assertThat(bill.getTotalTaxes(), comparesEqualTo(new BigDecimal("2.90")));
 
   }
 
@@ -159,8 +158,8 @@ public class IntegrationTests {
 //      }
 //    }
 
-    assertThat(bill.getTotalAmount(), is(71.88));
-    assertThat(bill.getTotalTaxes(), is(3.90));
+    assertThat(bill.getTotalAmount(), comparesEqualTo(new BigDecimal("71.88")));
+    assertThat(bill.getTotalTaxes(), comparesEqualTo(new BigDecimal("3.90")));
 
   }
 
