@@ -23,6 +23,7 @@ public class TaxedItemTest {
     assertThat(TaxedItem.roundToNearest5cents(new BigDecimal("0.0500000000001")), comparesEqualTo(tenCents));
     assertThat(TaxedItem.roundToNearest5cents(new BigDecimal("0.06")), comparesEqualTo(tenCents));
     assertThat(TaxedItem.roundToNearest5cents(new BigDecimal("0.075")), comparesEqualTo(tenCents));
+    assertThat(TaxedItem.roundToNearest5cents(new BigDecimal("0.14999")), comparesEqualTo(fifteenCents));
   }
 
   @Test
