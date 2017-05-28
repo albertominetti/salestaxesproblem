@@ -5,12 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Map;
-import java.util.Map.Entry;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import it.minetti.salestaxesproblem.Product.ProductType;
@@ -22,9 +17,9 @@ public class Tests {
 	@Test
 	public void input1() throws TaxesAlreadyApplied, TaxesNotYetApplied {
 		System.out.println("Test for input 1");
-		Product theBook = Product.create("book", ProductType.BOOK, false, 12.49);
-		Product theCD = Product.create("music CD", ProductType.OTHER, false, 14.99);
-		Product theChocolate = Product.create("chocolate bar", ProductType.FOOD, false, 0.85);
+    Product theBook = new Product("book", ProductType.BOOK, false, 12.49);
+    Product theCD = new Product("music CD", ProductType.OTHER, false, 14.99);
+    Product theChocolate = new Product("chocolate bar", ProductType.FOOD, false, 0.85);
 		
 		Receipt r = new Receipt();
 
@@ -65,8 +60,8 @@ public class Tests {
 	@Test
 	public void input2() throws TaxesAlreadyApplied, TaxesNotYetApplied {
 		System.out.println("Test for input 2");
-		Product theChocolate = Product.create("imported box of chocolate", ProductType.FOOD, true, 10.0);
-		Product thePerfume = Product.create("imported bottle of perfume", ProductType.OTHER, true, 47.50);
+    Product theChocolate = new Product("imported box of chocolate", ProductType.FOOD, true, 10.0);
+    Product thePerfume = new Product("imported bottle of perfume", ProductType.OTHER, true, 47.50);
 		
 		Receipt r = new Receipt();
 
@@ -104,10 +99,10 @@ public class Tests {
 	@Test
 	public void input3() throws TaxesAlreadyApplied, TaxesNotYetApplied {
 		System.out.println("Test for input 3");
-		Product theImportedPerfume = Product.create("imported bottle of perfume", ProductType.OTHER, true, 27.99);
-		Product thePerfume = Product.create("bottle of perfume", ProductType.OTHER, false, 18.99);
-		Product thePills = Product.create("packet of headache pills", ProductType.MEDICAL, false, 9.75);
-		Product theChocolate = Product.create("box of imported chocolate", ProductType.FOOD, true, 11.25);
+    Product theImportedPerfume = new Product("imported bottle of perfume", ProductType.OTHER, true, 27.99);
+    Product thePerfume = new Product("bottle of perfume", ProductType.OTHER, false, 18.99);
+    Product thePills = new Product("packet of headache pills", ProductType.MEDICAL, false, 9.75);
+    Product theChocolate = new Product("box of imported chocolate", ProductType.FOOD, true, 11.25);
 		
 		Receipt r = new Receipt();
 
