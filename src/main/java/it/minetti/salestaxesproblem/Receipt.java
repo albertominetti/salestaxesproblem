@@ -14,27 +14,18 @@ public class Receipt {
 	}
 
 	public int addProduct(Product p) throws TaxesAlreadyApplied {
-		if (taxesApplied)
-			throw new TaxesAlreadyApplied();
-		Item i = new UntaxedItem(p);
-		int quantity = 0;
-
-		if (items.containsKey(i)) {
-			quantity = items.get(p);
-		}
-
-		items.put(i, quantity + 1);
-		return quantity + 1;
+		return addProducts(p, 1);
 	}
 
 	public int addProducts(Product p, int amount) throws TaxesAlreadyApplied {
-		if (taxesApplied)
+		if (taxesApplied) {
 			throw new TaxesAlreadyApplied();
+		}
 		Item i = new UntaxedItem(p);
 		int quantity = 0;
 
 		if (items.containsKey(i)) {
-			quantity = items.get(p);
+			quantity = items.get(i);
 		}
 
 		items.put(i, quantity + amount);
