@@ -12,10 +12,10 @@ public class Printer {
   private static String NL = System.getProperty("line.separator");
   private static DecimalFormat df = new DecimalFormat("0.00");
 
-  public StringBuffer print(Receipt receipt) {
+  public StringBuilder print(Receipt receipt) {
     Map<UntaxedItem, Integer> items = receipt.getItems();
 
-    StringBuffer sb = new StringBuffer(items.size() * 30);
+    StringBuilder sb = new StringBuilder(items.size() * 30);
     sb.append("Receipt input: " + NL);
     for (Map.Entry<UntaxedItem, Integer> e : items.entrySet()) {
       UntaxedItem item = e.getKey();
@@ -26,10 +26,10 @@ public class Printer {
     return sb;
   }
 
-  public StringBuffer print(Bill bill) {
+  public StringBuilder print(Bill bill) {
     Map<TaxedItem, Integer> items = bill.getItems();
 
-    StringBuffer sb = new StringBuffer(items.size() * 30 + 100);
+    StringBuilder sb = new StringBuilder(items.size() * 30 + 100);
     sb.append("Receipt output: " + NL);
     for (Map.Entry<TaxedItem, Integer> e : items.entrySet()) {
       TaxedItem item = e.getKey();
