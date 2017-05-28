@@ -3,34 +3,29 @@ package it.minetti.salestaxesproblem;
 import it.minetti.salestaxesproblem.Product.ProductType;
 
 public class ImportTaxedItem extends TaxedItem {
-	
-	Item innerItem;
-	
-	final double rate = 0.05;
-	
+
 	public ImportTaxedItem(Item item){
 		super(item);
-		this.innerItem = item;
 	}
 	
 	@Override
 	double getRate() {
-		return this.rate;
+		return 0.05;
 	}
 
 	public boolean isImported() {
-		return innerItem.isImported();
+		return getItem().isImported();
 	}
 
 	public String getDescription() {
-		return innerItem.getDescription();
+		return getItem().getDescription();
 	}
 
 	public double getShelfPrice() {
-		return innerItem.getShelfPrice();
+		return getItem().getShelfPrice();
 	}
 
 	public ProductType getType() {
-		return innerItem.getType();
+		return getItem().getType();
 	}
 }
