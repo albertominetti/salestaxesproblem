@@ -1,8 +1,6 @@
 package it.minetti.salestaxesproblem.domain;
 
 import it.minetti.salestaxesproblem.TaxCalculator;
-import it.minetti.salestaxesproblem.domain.Item;
-import it.minetti.salestaxesproblem.domain.UntaxedItem;
 import it.minetti.salestaxesproblem.entity.Product;
 
 import java.util.LinkedHashMap;
@@ -54,7 +52,7 @@ public class Receipt {
 	}
 	
 	public void calculateTaxes() {
-		items = TaxCalculator.calculateTaxes(items);
+		items = TaxCalculator.applyTaxesTo(items);
 		taxesApplied = true;
 	}
 	

@@ -1,6 +1,5 @@
 package it.minetti.salestaxesproblem;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,44 +10,37 @@ import it.minetti.salestaxesproblem.domain.ImportTaxedItem;
 import it.minetti.salestaxesproblem.domain.Item;
 import it.minetti.salestaxesproblem.entity.Product.ProductType;
 
+import static java.util.Arrays.asList;
+
 
 public class TaxCalculator {
 
-	public static Map<Item, Integer> calculateTaxes(Map<Item, Integer> items){
-		Map<Item, Integer> taxedItems = new LinkedHashMap<Item, Integer>(items.size());
-		
+	private static List<ProductType> exemptionByType = asList(ProductType.BOOK, ProductType.FOOD, ProductType.MEDICAL);
+
+	public static Map<Item, Integer> applyTaxesTo(Map<Item, Integer> items){
+		Map<Item, Integer> taxedItems = new LinkedHashMap<>(items.size());
+
 		for (Entry<Item, Integer> e : items.entrySet()) {
 			Item item = e.getKey();
 			int quantity = e.getValue();
-			
-			Item taxedItem = calculateTaxes(item);
-			
-			taxedItems.put(taxedItem, quantity);
+
+			taxedItems.put(applyTaxesTo(item), quantity);
 		}
 		return taxedItems;
 	}
-	
-	private static List<ProductType> exemptionByType = new ArrayList<ProductType>() {
-		private static final long serialVersionUID = 7482555310601248768L;
 
-		{
-			add(ProductType.BOOK);
-			add(ProductType.FOOD);
-			add(ProductType.MEDICAL);
-		}
-	};
 
-	
-	public static Item calculateTaxes(Item item){
-		
+	public static Item applyTaxesTo(Item item){
+		Item taxedItem = item;
+
 		if (!exemptionByType.contains(item.getType())) {
-			item = new BasicTaxedItem(item);
+      taxedItem = new BasicTaxedItem(item);
 		}
-		
+
 		if (item.isImported()) {
-			item = new ImportTaxedItem(item);
+      taxedItem = new ImportTaxedItem(item);
 		}
-		
-		return item;
+
+		return taxedItem;
 	}
 }
