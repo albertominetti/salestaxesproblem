@@ -1,3 +1,8 @@
+> :warning: **outdated software**: this small project has been done before start to work seriously with Java, it was more than 8 years ago.
+
+> :skull: **run away if you look for good development practices**
+
+
 # salestaxesproblem
 
 Solve it using the Java programming language, without 3rd party frameworks -- you can use JUnit and/or whatever might help for testing, as well as your favourite build automation tool. This problem requires some kind of input. You are free to implement any mechanism for feeding input into your solution (for example, using hard coded data within a unit test). You should provide sufficient evidence that your solution is complete by, as a minimum, indicating that it works correctly against the supplied test data.
